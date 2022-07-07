@@ -16,5 +16,6 @@ namespace Entity.DTO
         public string Imageurl { get; set; }
         public string CatagoryName { get; set; }
         public int CategoryId { get; set; }
+
     }
 }

@@ -31,6 +31,7 @@ namespace DAL.Concrete.EntityFraneWork
 			   && proCategory.CategoryId == categoryId
 			   select new ProductDTO
 			   {
+				   Description = product.Description,
 				   ProductId = product.Id,
 				   CatagoryName = category.CategoryName,
 				   CategoryId = category.Id,
@@ -41,11 +42,7 @@ namespace DAL.Concrete.EntityFraneWork
 			   };
 			return result;
 		}
-		/// <summary>
-		/// Model
-		/// </summary>
-		/// <param name="model"></param>
-		/// <returns></returns>
+		
 		public async Task<bool> ProductCreate(ProductCreateDTO model)
 		{
 			bool ok = false;

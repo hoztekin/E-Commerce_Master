@@ -7,7 +7,7 @@ namespace WebApp.ViewCompenents
 {
 	public class HeaderViewComponent : ViewComponent
 	{
-		private readonly ICategoryService categoryService;
+		public readonly ICategoryService categoryService;
 
 		public HeaderViewComponent(ICategoryService categoryService)
 		{
