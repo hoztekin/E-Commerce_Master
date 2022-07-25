@@ -1,4 +1,7 @@
 using BLL.IOC;
+using DAL.Concrete.EF.Database;
+using DAL.SeedData;
+using Entity.POCO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.CustomerValidation;
 
 namespace WebApp
 {
@@ -17,20 +21,25 @@ namespace WebApp
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			
 		}
 
-		public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; set; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
 			services.Dependency();
+			services.AddIdentity<AppUser, AppRole>()
+				.AddEntityFrameworkStores<CommerceDbContext>()
+				.AddErrorDescriber<AppUserValidation>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			//Seed.SeedData();
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -43,13 +52,13 @@ namespace WebApp
 			}
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
-
 			app.UseRouting();
-
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
-			{
+			{	
+				endpoints.MapAreaControllerRoute(name:"AdminArea", areaName:"Admin", pattern: "Admin/{controller=Admin}/{action=Index}");
 				endpoints.MapDefaultControllerRoute();
 				//endpoints.MapControllerRoute(
 				//	name: "default",

@@ -42,9 +42,9 @@ namespace BLL.Concrete
 				var result = categoryDAL.GetList().Result;
 				if (result != null && result.Count() > 0)
 				{
-					return new ResultMessage<IEnumerable<Category>>(result, ResponseMessage.SearchWarning, ResultType.Success);
+					return new ResultMessage<IEnumerable<Category>>(result, ResponseMessage.SearchSucces, ResultType.Success);
 				}
-				return new ResultMessage<IEnumerable<Category>>(null, ResponseMessage.SearchSucces, ResultType.Notfound);
+				return new ResultMessage<IEnumerable<Category>>(null, ResponseMessage.SearchWarning, ResultType.Notfound);
 			}
 			catch (Exception ex)
 			{

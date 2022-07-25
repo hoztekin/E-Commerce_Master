@@ -11,6 +11,7 @@ namespace Entity.POCO
 	{
 		public string ProductName { get; set; }
 		public string CategoryName { get; set; }
+		public string BrandName { get; set; }
 		public DateTime SalesStartDate { get; set; }
 		public DateTime SalesEndDate { get; set; }
 		public int StockLevel { get; set; }
@@ -23,5 +24,6 @@ namespace Entity.POCO
 		public virtual ICollection<ProductSupplier> ProductSupplier { get; set; }
 		public virtual ICollection<ProductImage> ProductImage { get; set; }
 		public virtual ICollection<ProductCategory> ProductCategory { get; set; }
+		public virtual ICollection<ProductBrand> ProductBrand { get; set; }
 	}
 }

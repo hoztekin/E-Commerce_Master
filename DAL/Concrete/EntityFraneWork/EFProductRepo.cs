@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete.EntityFraneWork
 {
-	public class EFProductRepo : EFRepository<Product, OrganicDbContext>, IProductDAL
+	public class EFProductRepo : EFRepository<Product, CommerceDbContext>, IProductDAL
 	{
-		private readonly OrganicDbContext db;
+		private readonly CommerceDbContext db;
 
-		public EFProductRepo(OrganicDbContext db) : base(db)
+		public EFProductRepo(CommerceDbContext db) : base(db)
 		{
 			this.db = db;
 		}
@@ -25,8 +25,10 @@ namespace DAL.Concrete.EntityFraneWork
 		{
 			var result =
 			   from product in db.Products
+			   join Brand in db.Products on product.Id equals Brand.Id
 			   join proCategory in db.ProductCategories on product.Id equals proCategory.ProductId
 			   join category in db.Categories on proCategory.CategoryId equals category.Id
+			   
 			   where product.Active == true && product.Deleted == false
 			   && proCategory.CategoryId == categoryId
 			   select new ProductDTO
@@ -38,6 +40,9 @@ namespace DAL.Concrete.EntityFraneWork
 				   StockLevel = product.StockLevel,
 				   ListPrice = product.ListPrice,
 				   ProductName = product.ProductName,
+				   BrandId = Brand.Id,
+				   BrandName = Brand.BrandName,
+				   
 				   Imageurl = db.ProductImages.FirstOrDefault(x => x.ProductId == product.Id).ImageUrl
 			   };
 			return result;

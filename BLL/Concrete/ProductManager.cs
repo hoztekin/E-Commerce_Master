@@ -63,7 +63,19 @@ namespace BLL.Concrete
 
 		public ResultMessage<IEnumerable<Product>> GetList()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var result = productDAL.GetList().Result;
+				if (result != null && result.Count() > 0)
+				{
+					return new ResultMessage<IEnumerable<Product>>(result, ResponseMessage.SearchSucces, ResultType.Success);
+				}
+				return new ResultMessage<IEnumerable<Product>>(null, ResponseMessage.SearchWarning, ResultType.Notfound);
+			}
+			catch (Exception ex)
+			{
+				return new ResultMessage<IEnumerable<Product>>(null, ex.ToInnest().Message, ResultType.Error);
+			}
 		}
 
 		public ResultMessage<IEnumerable<Product>> GetList(Expression<Func<Product, bool>> func = null, params string[] include)

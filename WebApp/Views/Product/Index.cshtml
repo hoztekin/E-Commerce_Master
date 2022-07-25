@@ -1,0 +1,77 @@
+﻿@model List<ProductDTO>
+@{
+	ViewData["Title"] = "Index";
+	int totalPage = Convert.ToInt32(ViewBag.TotalPage);
+    int productId = Convert.ToInt32(ViewBag.Product);
+
+}
+
+
+<div class="features_items">
+	<!--features_items-->
+	<h2 class="title text-center">Ürünler</h2>
+	@foreach (var item in Model)
+	{
+		<div class="col-sm-4">
+			<div class="product-image-wrapper">
+				<div class="single-products">
+
+
+					<div class="productinfo text-center">
+
+						<img src=@item.Imageurl alt="" />
+						<h2>@item.ListPrice</h2>
+						<p>@item.ProductName</p>
+						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+
+					</div>
+					<div class="product-overlay">
+						<div class="overlay-content">
+
+
+							<h2>@item.ListPrice</h2>
+							<p>@item.ProductName</p>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+
+
+						</div>
+					</div>
+
+				</div>
+				<div class="choose">
+					<ul class="nav nav-pills nav-justified">
+						<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+						<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	}
+
+	
+
+
+	<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" asp-route-id="@productId" asp-route-page="0" asp-action="Index" asp-controller="Product" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+	@for (int i = 0; i < totalPage; i++)
+			{
+						<li class="page-item"><a asp-route-id="@productId" asp-route-page="@i" asp-action="Index" asp-controller="Product" class="page-link" >
+							@(i+1)</a></li>
+			}
+    
+    
+    <li class="page-item">
+      <a class="page-link" asp-route-id="@productId" asp-route-page="@(totalPage-1)" asp-action="Index" asp-controller="Product" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div><!--features_items-->

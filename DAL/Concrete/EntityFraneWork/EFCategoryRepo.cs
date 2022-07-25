@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete.EntityFraneWork
 {
-	public class EFCategoryRepo : EFRepository<Category, OrganicDbContext>, ICategoryDAL
+	public class EFCategoryRepo : EFRepository<Category, CommerceDbContext>, ICategoryDAL
 	{
-		public readonly OrganicDbContext db;
+		public readonly CommerceDbContext db;
 
-		public EFCategoryRepo(OrganicDbContext db) : base(db)
+		public EFCategoryRepo(CommerceDbContext db) : base(db)
 		{
 			this.db = db;
 		}

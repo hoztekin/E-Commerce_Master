@@ -22,7 +22,10 @@ namespace DAL.Concrete.Mapping
 			builder.Property(x => x.SalesStartDate).HasColumnType("datetime2");
 			builder.Property(x => x.SalesEndDate).HasColumnType("datetime2");
 
-			//ProductCategori ve ProductSupplier tablosu ile ilişki kuruldu.
+			builder.HasKey(x => x.Id);
+			builder.HasMany(x => x.ProductBrand).WithOne(x => x.Product).HasForeignKey(x => x.ProductId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+
+			//ProductCategori, ProductSupplier, ProductBrand tablosu ile ilişki kuruldu.
 		}
 	}
 }

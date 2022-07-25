@@ -21,5 +21,8 @@ namespace Core.Business
 
 		public static string ProductAdd { get; } = "Ürün yükleme işlemi başarılı";
 		public static string ProductAddWarning { get; } = "Ürün yükleme işlemi başarısız";
+
+		public static string NotValidation { get; set; } = "Zorunlu Parametreler boş gönderilemez";
+
 	}
 }

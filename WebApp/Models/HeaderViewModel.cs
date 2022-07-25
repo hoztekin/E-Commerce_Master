@@ -1,5 +1,4 @@
 ﻿using Entity.POCO;
-using System;
 using System.Collections.Generic;
 
 namespace WebApp.Models
@@ -9,3 +8,4 @@ namespace WebApp.Models
 		public List<Category> Categories { get; set; }
 	}
 }
+
